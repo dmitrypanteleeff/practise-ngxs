@@ -19,11 +19,18 @@
       role="listitem"
       *ngFor="let item of todoItems$ | async; trackBy: trackById"
     >
-      <div class="flex items-center">
+      <div class="flex items-center mr-4">
         <mat-checkbox [checked]="item.isDone" (change)="toggleItem(item)">
           {{ item.title }}
         </mat-checkbox>
       </div>
+
+      <button type="button"
+        mat-raised-button
+        color="primary"
+        (click)="deleteItem(item)">
+          x
+      </button>
     </mat-list-item>
   </mat-list>
   <!-- /Todo items -->

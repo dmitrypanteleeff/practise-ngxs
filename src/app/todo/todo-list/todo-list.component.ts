@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Select, Store } from '@ngxs/store';
-import { AddItemAction, ToggleItemAction } from '../todo.actions';
+import { AddItemAction, ToggleItemAction, DeleteItemAction } from '../todo.actions';
 import { TodoModel } from '../types/todo';
 import { Observable } from 'rxjs';
 import { TooSelectors } from '../todo.selectors';
@@ -53,5 +53,9 @@ export class TodoListComponent {
     //   },
     // ];
     this.newItemName = '';
+  }
+
+  deleteItem(todoItem: TodoModel) {
+    this._store.dispatch(new DeleteItemAction(todoItem.id))
   }
 }

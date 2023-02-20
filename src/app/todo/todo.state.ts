@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
-import { AddItemAction, ToggleItemAction } from './todo.actions';
+import { AddItemAction, DeleteItemAction, ToggleItemAction } from './todo.actions';
 import { TodoModel } from './types/todo';
 
 export interface TodoStateModel {
@@ -59,5 +59,19 @@ export class TodoState {
       items: [...updateState]
     })
 
+  }
+
+  @Action(DeleteItemAction)
+  deleteItem(ctx: StateContext<TodoStateModel>, action: DeleteItemAction) {
+    const { id } = action;
+    if (!id) { return; }
+
+    const state = ctx.getState();
+
+    const updateState = state.items.filter(item => item.id !== id);
+
+    ctx.setState({
+      items: [...updateState]
+    })
   }
 }
